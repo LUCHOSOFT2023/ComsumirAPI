@@ -44,10 +44,28 @@
       </center>
       <div class="sidebar">
         <div class="module">
+          <p class="module-heading">Configuración <i class="bi bi-chevron-down arrow-icon"></i>
+            <!-- Flecha hacia abajo --></p>
+          <ul class="options">
+            <li onclick="window.location.href='gestionroles.html'">Roles</li>
+            <li onclick="window.location.href='gestionPermisos.html'">Permisos</li>
+          </ul>
+        </div>
+        <div class="module">
+          <p class="module-heading">Usuarios <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
+          </p>
+          <ul class="options">
+            <li onclick="window.location.href='gestionUsuario.html'">Usuarios</li>
+          </ul>
+        </div>
+        <div class="module">
           <p class="module-heading">Compras <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
           </p>
           <ul class="options">
             <li onclick="window.location.href='CategoriaInsumos.html';">Categoria de insumos</li>
+            <li onclick="window.location.href='Insumos.html';">Insumos</li>
+            <li onclick="window.location.href='gestionProveedores.html'">Proveedores</li>
+            <li onclick="window.location.href='gestionCompras.html'">Compras</li>
           </ul>
         </div>
         <div class="module">
@@ -60,6 +78,10 @@
         <div class="module">
           <p class="module-heading">Ventas <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo --></p>
           <ul class="options">
+            <li onclick="window.location.href='categoriaProductos.html'">Categoria de productos</li>
+            <li onclick="window.location.href='gestionProductos.html'">Productos</li>
+            <li onclick="window.location.href='Clientes.html';">Clientes</li>
+            <li onclick="window.location.href='pedidos.html'">Pedidos</li>
             <li onclick="window.location.href='Ventas.html'">Ventas</li>
           </ul>
         </div>
@@ -90,8 +112,8 @@
           <div class="contDerecha">
             <div class="input1">
               <p><i class="fa-solid fa-message iconosRojos"></i> Descripción</p>
-              <textarea name="Orden" id="" cols="30" rows="2" class="input-field2"
-                placeholder="Descripción de producción"></textarea>
+              <textarea name="Orden" id="Descripcion" cols="30" rows="2" class="input-field2"
+                placeholder="Descripción de la venta"></textarea>
             </div>
           </div>
         </div>
@@ -105,78 +127,84 @@
           <div class="contDerechaAbajo">
             <div class="input1">
               <p class="parrafoGris"><i class="fa-solid fa-dollar-sign iconosRojos"></i> Precio de la venta</p>
-              <input class="input-field" type="number" placeholder="45.000" readonly>
+              <input class="input-field" type="number" placeholder="Ingrese el precio" id="precio">
             </div>
           </div>
         </div>
-        <div class="cajaAbajo">
-          <div class="cajaAbajoIzquierdo">
-            <table id="TablaOrdenProduccion">
-              <thead>
-                <tr class="trclass">
-                  <th colspan="6"><i>Pedido agregado</i></th>
-                </tr>
-                <tr id="TStablaInsumos">
-                  <th id="StablaInsumos"><i class="fa-solid fa-key iconosRojos"></i> ID</th>
-                  <th id="StablaInsumos"><i class="fa-solid fa-message iconosRojos"></i> Descripción</th>
-                  <th id="StablaInsumos"><i class="fa-solid fa-dollar-sign iconosRojos"></i> Precio del pedido</th>
-                  <th id="StablaInsumos"><i class="fa-solid fa-calendar-days iconosRojos"></i> Fecha del pedido</th>
-                  <th id="StablaInsumos"><i class="fa-solid fa-list iconosRojos"></i> Estado del pedido</th>
-                  <th id="StablaInsumos"><i class="fa-solid fa-user iconosRojos"></i> Cliente</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr id="TSDatos">
-                  <td>1</td>
-                  <td>...</td>
-                  <td>50.000</td>
-                  <td>15/01/23</td>
-                  <td>Habilitado</td>
-                  <td>Santiago</td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="cajaBotones">
+          <button class="vinotinto" onclick="Agregar()">Guardar</button>
+          <div class="espacioEntreBotones"></div>
+          <button class="boton botonAgregar" onclick="Cancelar()">Cancelar</button>
+        </div>
+        <div class="contenedoremergentes">
+          <div class="caja1">
+            <div class="cajaAbajo">
+              <div class="cajaAbajoIzquierdo scroll-table">
+                <p id="titulo">Pedido Agregado</p>
+                <table id="TablaOrdenProduccion2">
+                  <thead>
+                    <tr id="TStablaInsumos">
+                      <th id="StablaInsumos"><i class="fa-solid fa-key iconosRojos"></i> ID</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-message iconosRojos"></i> Descripción</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-dollar-sign iconosRojos"></i> Precio del pedido</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-calendar-days iconosRojos"></i> Fecha del pedido</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-list iconosRojos"></i> Estado del pedido</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-user iconosRojos"></i> Cliente</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="TSDatos">
+                      <td>1</td>
+                      <td>...</td>
+                      <td>50.000</td>
+                      <td>15/01/23</td>
+                      <td>Habilitado</td>
+                      <td>Santiago</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="divBoton">
           <div id="BtnAgregarIn">
-            <button class="boton botonAgregar" id="openPopupBtn">+ Agregar Pedido</button>
+            <a class="botonmas vinotinto fa-solid fa-plus" id="openPopupBtn"></a>
             <div id="popup" class="contVentana">
               <input type="text" id="searchInput" placeholder="Buscar por ID...">
               <br>
               <br>
               <table id="dataTable">
-                  <tr>
-                      <th><i class="fa-solid fa-key iconosRojos"></i> ID</th>
-                      <th><i class="fa-solid fa-message iconosRojos"></i> Descripción</th>
-                      <th><i class="fa-solid fa-calendar-days iconosRojos"></i> Fecha del pedido</th>
-                      <th><i class="fa-solid fa-dollar-sign iconosRojos"></i> Precio del Pedido</th>
-                      <th><i class="fa-solid fa-key iconosRojos"></i> ID Cliente</th>
-                      <th><i class="fa-solid fa-list iconosRojos"></i> Seleccionar</th>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>ES..</td>
-                      <td>10/07/23</td>
-                      <td>50.000</td>
-                      <td>5</td>
-                      <td><input type="radio" name="radio1" id="radio"></td>
-                  </tr>
-                  <tr>
-                      <td>2</td>
-                      <td>ES..</td>
-                      <td>10/07/23</td>
-                      <td>60.000</td>
-                      <td>3</td>
-                      <td><input type="radio" name="radio1" id="radio"></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>ES..</td>
-                    <td>11/07/23</td>
-                    <td>100000</td>
-                    <td>7</td>
-                    <td><input type="radio" name="radio1"></td>
+                <tr>
+                  <th><i class="fa-solid fa-key iconosRojos"></i> ID</th>
+                  <th><i class="fa-solid fa-message iconosRojos"></i> Descripción</th>
+                  <th><i class="fa-solid fa-calendar-days iconosRojos"></i> Fecha del pedido</th>
+                  <th><i class="fa-solid fa-dollar-sign iconosRojos"></i> Precio del Pedido</th>
+                  <th><i class="fa-solid fa-key iconosRojos"></i> ID Cliente</th>
+                  <th><i class="fa-solid fa-list iconosRojos"></i> Seleccionar</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>ES..</td>
+                  <td>10/07/23</td>
+                  <td>50.000</td>
+                  <td>5</td>
+                  <td><input type="radio" name="radio1" id="radio"></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ES..</td>
+                  <td>10/07/23</td>
+                  <td>60.000</td>
+                  <td>3</td>
+                  <td><input type="radio" name="radio1" id="radio"></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>ES..</td>
+                  <td>11/07/23</td>
+                  <td>100000</td>
+                  <td>7</td>
+                  <td><input type="radio" name="radio1"></td>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -185,32 +213,26 @@
                   <td>40.000</td>
                   <td>2</td>
                   <td><input type="radio" name="radio1"></td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>ES..</td>
-                <td>11/07/23</td>
-                <td>20.000</td>
-                <td>8</td>
-                <td><input type="radio" name="radio1"></td>
-              </tr>
-                  <!-- Agregar más filas aquí -->
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>ES..</td>
+                  <td>11/07/23</td>
+                  <td>20.000</td>
+                  <td>8</td>
+                  <td><input type="radio" name="radio1"></td>
+                </tr>
+                <!-- Agregar más filas aquí -->
               </table>
               <br>
               <br>
-              <button  id="insertBtn">Guardar</button>
-              <button id="cancelBtn" onclick="CancelarV()">Cancelar</button>
+              <button id="insertBtn" class="vinotinto">Guardar</button>
+              <button id="cancelBtn" class="rojo"  onclick="CancelarV()">Cancelar</button>
             </div>
           </div>
-        </div>
-        <div class="btnVentas">
-          <button class="boton boton-generar" onclick="Agregar()">Guardar</button>
-          <div class="espacioEntreBotones"></div>
-          <button class="boton botonAgregar" onclick="Cancelar()">Cancelar</button>
-        </div>
         <br>
       </div>
-      
+
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -218,6 +240,7 @@
   <script src="js/Menu.js"></script>
   <script src="js/gestionVentas.js"></script>
   <script src="js/dataTable.js"></script>
+
 </html>
 
 </body>

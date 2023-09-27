@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  
+
   <!-- Incluye la biblioteca de Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Incluye la biblioteca de Bootstrap Icons -->
@@ -52,10 +52,28 @@
       </center>
       <div class="sidebar">
         <div class="module">
+          <p class="module-heading">Configuración <i class="bi bi-chevron-down arrow-icon"></i>
+            <!-- Flecha hacia abajo --></p>
+          <ul class="options">
+            <li onclick="window.location.href='gestionroles.html'">Roles</li>
+            <li onclick="window.location.href='gestionPermisos.html'">Permisos</li>
+          </ul>
+        </div>
+        <div class="module">
+          <p class="module-heading">Usuarios <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
+          </p>
+          <ul class="options">
+            <li onclick="window.location.href='gestionUsuario.html'">Usuarios</li>
+          </ul>
+        </div>
+        <div class="module">
           <p class="module-heading">Compras <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
           </p>
           <ul class="options">
             <li onclick="window.location.href='CategoriaInsumos.html';">Categoria de insumos</li>
+            <li onclick="window.location.href='Insumos.html';">Insumos</li>
+            <li onclick="window.location.href='gestionProveedores.html'">Proveedores</li>
+            <li onclick="window.location.href='gestionCompras.html'">Compras</li>
           </ul>
         </div>
         <div class="module">
@@ -68,6 +86,10 @@
         <div class="module">
           <p class="module-heading">Ventas <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo --></p>
           <ul class="options">
+            <li onclick="window.location.href='categoriaProductos.html'">Categoria de productos</li>
+            <li onclick="window.location.href='gestionProductos.html'">Productos</li>
+            <li onclick="window.location.href='Clientes.html';">Clientes</li>
+            <li onclick="window.location.href='pedidos.html'">Pedidos</li>
             <li onclick="window.location.href='Ventas.html'">Ventas</li>
           </ul>
         </div>
@@ -90,57 +112,139 @@
             <h1>Agregar Orden de Producción</h1>
           </div>
         </center>
-          <div class="contForms">
-            <div class="contIzquierda">
-              <div class="input1">
-                <p class="parrafoGris"><i class="fa-solid fa-key iconosRojos"></i> ID orden de producción</p>
-                <input class="input-field" type="text" name="IdOrdenProd"placeholder="001" id="IdOrdenProd">
-              </div>
-              <br>
-            </div>
-            <div class="contDerecha">
-              <div class="input1">
-                <p><i class="fa-solid fa-message iconosRojos"></i> Descripción</p>
-                <textarea name="DescOrden" id="DescOrden" cols="30" rows="2" class="input-field2"
-                  placeholder="Descripción de producción"></textarea>
-                <!--<input class="input-field2" type="text" placeholder="Esta orde de producción...">-->
-              </div>
-            </div>
-            
-              <div class="input1">
-                <p><i class="fa-solid fa-calendar-days iconosRojos"></i> Seleccionar Fecha</p>
-                <input class="input-field2" type="date" name="FechaOrden" id="FechaOrden">
-              </div>
+        <br>
+        <div class="contForms">
+          <div class="contIzquierda">
+            <div class="input1">
+              <p class="parrafoGris"><i class="fa-solid fa-key iconosRojos"></i> ID orden de producción</p>
+              <input class="input-field" type="text" name="IdOrdenProd" placeholder="001" id="IdOrdenProd">
             </div>
             <br>
-           
-            <div class="contDerecha">
-              <div class="input2">
-                <p><i class="fa-solid fa-beer iconosRojos"></i> insumo</p>
-                <input class="input-field2" type="text" id="insumo">
-                <!--<input class="input-field2" type="text" placeholder="Esta orde de producción...">-->
-                
-              </div>
-              <div class="input3">
-                <p><i class="fa-solid fa-beer iconosRojos"></i> ID empleado</p>
-                <input class="input-field2" type="text" id="id_empleado">
-                <!--<input class="input-field2" type="text" placeholder="Esta orde de producción...">-->
-              </div>
+          </div>
+          <div class="contDerecha">
+            <div class="input1">
+              <p><i class="fa-solid fa-message iconosRojos"></i> Descripción</p>
+              <textarea name="DescOrden" id="DescOrden" cols="30" rows="2" class="input-field2"
+                placeholder="Descripción de producción"></textarea>
+              <!--<input class="input-field2" type="text" placeholder="Esta orde de producción...">-->
             </div>
-            <div class="btninsumos">
+          </div>
+
+          <div class="input1">
+            <p><i class="fa-solid fa-calendar-days iconosRojos"></i> Seleccionar Fecha</p>
+            <input class="input-field2" type="date" name="FechaOrden" id="FechaOrden">
+          </div>
+        </div>
+        <br>
+        <div class="btninsumos">
           <button class="boton boton-generar" onclick="Registrar()">Guardar</button>
           <div class="espacioEntreBotones"></div>
           <button class="boton botonAgregar" onclick="Cancelar()">Cancelar</button>
+          <br>
         </div>
-          </div>
-       
-        </div>
-        
         <br>
+        <div class="contenedoremergentes">
+          <div class="caja1">
+            <div class="cajaAbajo">
+              <div class="cajaAbajoIzquierdo scroll-table">
+                <p id="titulo">Insumos agregados</p>
+                <table id="insumosAgregados" class="TablaOrdenProduccion2">
+                  <thead>
+                    <tr id="TStablaInsumos">
+                      <th id="StablaInsumos" ><i class="fa-solid fa-key iconosRojos"></i> ID</th>
+                      <th id="StablaInsumos" colspan="3"><i class="fa-solid fa-font iconosRojos"></i>Nombre</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-lightbulb iconosRojos"></i> Stock</th>
+                      <th id="StablaInsumos"><i class="fa-solid fa-list iconosRojos"></i> Categoria</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div id="BtnAgregarIn">
+            <a class="botonmas vinotinto fa-solid fa-plus" id="openPopupBtn"></a>
+            <div id="popup" class="contVentana">
+              <h3>Selecciona los insumos a insertar:</h3>
+              <input type="text" id="searchInput" placeholder="Buscar...">
+              <br>
+              <br>
+              <table id="dataTable">
+                <tr>
+                  <th><i class="fa-solid fa-key iconosRojos"></i> ID</th>
+                  <th><i class="fa-solid fa-image iconosRojos"></i> Imagen</th>
+                  <th><i class="fa-solid fa-font iconosRojos"></i> Nombre</th>
+                  <th><i class="fa-solid fa-font iconosRojos"></i> Cantidad</th>
+                  <th><i class="fa-solid fa-font iconosRojos"></i> Stock</th>
+                  <th><i class="fa-solid fa-utensils iconosRojos"></i> Categoría</th>
+                  <th><i class="fa-solid fa-list iconosRojos"></i> Seleccionar</th>
+                </tr>
+                <tr>
+                  <td hidden></td>
+                  <td>1</td>
+                  <td><img src="ruta-a-tu-imagen-1.jpg" width="50"></td>
+                  <td>Manzana</td>
+                  <td><input type="number" style="width: 37px; height: 20px;" id="cantidad"></td>
+                  <td>300</td>
+                  <td>Frutas</td>
+                  <td><input type="checkbox" id="eleccion"></td>
+                </tr>
+                <tr>
+                  <td hidden></td>
+                  <td>2</td>
+                  <td><img src="ruta-a-tu-imagen-1.jpg" width="50"></td>
+                  <td>Arroz</td>
+                  <td><input type="number" style="width: 37px; height: 20px;" id="cantidad"></td>
+                  <td>200</td>
+                  <td>Granos</td>
+                  <td><input type="checkbox" id="eleccion"></td>
+                </tr>
+                <tr>
+                  <td hidden></td>
+                  <td>3</td>
+                  <td><img src="ruta-a-tu-imagen-1.jpg" width="50"></td>
+                  <td>Papa</td>
+                  <td><input type="number" style="width: 37px; height: 20px;" id="cantidad"></td>
+                  <td>500</td>
+                  <td>Granos</td>
+                  <td><input type="checkbox" id="eleccion"></td>
+                </tr>
+                <tr>
+                  <td hidden></td>
+                  <td>4</td>
+                  <td><img src="ruta-a-tu-imagen-1.jpg" width="50"></td>
+                  <td>aguacate</td>
+                  <td><input type="number" style="width: 37px; height: 20px;" id="cantidad"></td>
+                  <td>600</td>
+                  <td>Granos</td>
+                  <td><input type="checkbox" id="eleccion"></td>
+                </tr>
+                <tr>
+                  <td hidden></td>
+                  <td>5</td>
+                  <td><img src="ruta-a-tu-imagen-1.jpg" width="50"></td>
+                  <td>cebolla</td>
+                  <td><input type="number" style="width: 37px; height: 20px;" id="cantidad"></td>
+                  <td>100</td>
+                  <td>Granos</td>
+                  <td><input type="checkbox" id="eleccion"></td>
+                </tr>
+                <!-- Agregar más filas aquí -->
+              </table>
+              <br>
+              <br>
+              <button type="submit" id="insertBtn" class="vinotinto" onclick="Agregar()">Agregar</button>
+              <button id="cancelBtn"  class="rojo"  onclick="CancelarV()">Cancelar</button>
+
+            </div>
+          </div>
+          <br>
+          <br>
       </div>
-      
     </div>
-  </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/ValidacionOrdenProducción.js"></script>

@@ -8,7 +8,7 @@ const listarOrdenProduccion =async (busqueda)=>{
 
     if (busqueda){
         alert(busqueda)
-        urlAPI+= `?id_produccion=${encodeURIComponent(busqueda)}`;
+        urlAPI+= `id_produccion=${encodeURIComponent(busqueda)}`;
     }
 
     //Al desplegar en el servidor colocar la api del servidor 
@@ -42,20 +42,62 @@ const listarOrdenProduccion =async (busqueda)=>{
 
         })
 }
+function insertarDatosEnTablaDestino(dataToInsert) {
+    const tablaDestino = document.getElementById('insumosAgregados');
+    const tbody = tablaDestino.querySelector('tbody');
+
+    const newRow = document.createElement('tr');
+    
+    // Recorre los datos a insertar y crea celdas para cada uno
+    dataToInsert.forEach(function(data) {
+        const cell = document.createElement('td');
+        cell.textContent = data;
+        newRow.appendChild(cell);
+    });
+
+    // Agrega la fila a la tabla de destino
+    tbody.appendChild(newRow);
+
+    
+}
+
+// Luego, dentro de tu evento de clic, puedes llamar a esta función para insertar los datos
+document.getElementById('insertBtn').addEventListener('click', function() {
+    const dataTable = document.getElementById('dataTable');
+    const rows = dataTable.getElementsByTagName('tr');
+    let seleccionada = false;
+
+    for (let i = 1; i < rows.length; i++) {
+        const checkbox = rows[i].querySelector('input[type="checkbox"]');
+        if (checkbox.checked) {
+            seleccionada = true;
+            const cells = rows[i].getElementsByTagName('td');
+            const dataToInsert = [];
+            for (let j = 1; j < cells.length; j++) {
+                dataToInsert.push(cells[j].textContent);
+            }
+
+            // Llama a la función para insertar los datos en la tabla de destino
+            insertarDatosEnTablaDestino(dataToInsert);
+        }
+    }
+
+    document.getElementById('popup').style.display = 'none';
+});
 
 const registrarOrden = async () => {
     let id= document.getElementById('IdOrdenProd').value
     let descripcion=document.getElementById('DescOrden').value
     let fecha = document.getElementById('FechaOrden').value
-    let insumo = document.getElementById('insumo').value
-    let idempleado = document.getElementById('id_empleado').value
+    let insumo= "No disponible"
+    let empleado=0
 
     let orden = {
         id_produccion: id,
         descripcion_produccion: descripcion,
         fecha_produccion: fecha,
         insumo_produccion: insumo,
-        id_empleado:idempleado
+        id_empleado:empleado
     }
 
     fetch(url, {
@@ -86,10 +128,7 @@ const registrarOrden = async () => {
 
 function Registrar(){
     var fecha=document.getElementById("FechaOrden").value
-    var idempleado = document.getElementById("id_empleado").value
-    var insumo= document.getElementById("insumo").value
     var id=document.getElementById("IdOrdenProd").value
-    var descripcion= document.getElementById('DescOrden').value
     if(id==0){
       Swal.fire({
         title:'Error',
@@ -104,13 +143,6 @@ function Registrar(){
         text:'Aun no se agregado una fecha',
         confirmButtonColor: '#722F37',
         icon: 'error'
-      })
-    }else if( idempleado==""||insumo==""||descripcion==""){
-      Swal.fire({
-        title: 'Sin elección',
-        text: "Necesitas agregar una cantidad y/o seleccionar un insumo",
-        confirmButtonColor: '#722F37',
-        icon: 'warning'
       })
     }else{
         registrarOrden()

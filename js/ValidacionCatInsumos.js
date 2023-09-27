@@ -1,7 +1,7 @@
-url='https://luchosoftapi.onrender.com/api/insumos'
+url = 'https://luchosoftapi.onrender.com/api/insumos'
 
 
-function Cancelar(){
+function Cancelar() {
     Swal.fire({
         title: 'Salir sin guardar',
         text: "¿Quieres cancelar el registro?",
@@ -17,25 +17,27 @@ function Cancelar(){
     })
 }
 
-function Agregar(){
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
+function Agregar() {
+    let id= document.getElementById('Idcategoria').value
+    let nombre=document.getElementById('ActualizarCategoria').value
+    
+    if(id==0){
+        Swal.fire({
+            title: 'Error',
+            text: 'Aun no se agregado una identificación',
+            confirmButtonColor: '#722F37',
+            icon: 'error'
         })
-        Toast.fire({
-        icon: 'success',
-        title: 'Se ha actualizado correctamente'
-    }).then(() => {
-        // Redireccionar a una ruta específica
-        window.location.href = 'CategoriaInsumos.html';
-    });
+    } else if (nombre == "") {
+        Swal.fire({
+            title: 'Error',
+            text: 'Aun no se agregado una categoría',
+            confirmButtonColor: '#722F37',
+            icon: 'error'
+        })
+    }else{
+        actualizarCategoria();
+    }
 }
 
 const listarCategoria = async () => {
@@ -61,20 +63,24 @@ const listarCategoria = async () => {
 
             console.log(listaCategoria)
             datos =
-            listaCategoria.map(function (insumos) {//Recorrer el array
-                let estado=""
-                if(insumos.estado_categoriaInsumo==false){
-                    estado = "fas fa-toggle-off iconos toggle-icon gris"
-                }else{
-                    estado = "fas fa-toggle-on iconos toggle-icon"
-                }
-
+                listaCategoria.map(function (insumos) {//Recorrer el array
+                    let estado = ""
+                    if (insumos.estado_categoriaInsumo == false) {
+                        estado = "fas fa-toggle-off iconos toggle-icon gris"
+                    } else {
+                        estado = "fas fa-toggle-on iconos toggle-icon"
+                    }
+                    let estado_nuevo;
+                    if (insumos.estado_categoriaInsumo == true) {
+                        estado_nuevo = false;
+                    } else {
+                        estado_nuevo = true;
+                    }
                     respuesta += `<tr><td>${insumos.id_categoriaInsumo}</td>` +
-                        `<td>${insumos.nombre_categoriaInsumo}</td>`+
+                        `<td>${insumos.nombre_categoriaInsumo}</td>` +
                         `<td>
                             <i onclick="window.location.href='ActualizarCategoriaInsumos.html?id_categoriaInsumo=${insumos.id_categoriaInsumo}'" class="fa-solid fa-pen-to-square iconosRojos"></i>
-                            <i onclick="cambiarEstadoCategoria('${insumos.id_categoriaInsumo}', '${estado}')" class="${estado}"></i>
-
+                            <i onclick="cambiarEstadoCategoria('${insumos.id_categoriaInsumo}', '${estado_nuevo}')" class="${estado}"></i>
                         </td>`+
                         `</tr>`
                 })
@@ -82,6 +88,46 @@ const listarCategoria = async () => {
             table.rows.add($(respuesta)).draw();
         })
 }
+
+const cambiarEstadoCategoria = async (id_categoriaInsumo, estado_nuevo) => {
+
+    try {
+
+        let insumos = {
+            id_categoriaInsumo: id_categoriaInsumo,
+            estado_categoriaInsumo: estado_nuevo
+        }
+
+        const response = await fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            body: JSON.stringify(insumos),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        });
+
+        if (response.ok) {
+            const json = await response.json();
+            Swal.fire({
+                title: json.msg,
+                icon: 'success',
+                showCancelButton: false, // Evita que aparezca el botón "Cancelar",
+                confirmButtonColor: '#722F37',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // El usuario hizo clic en "OK"
+                    window.location.href = 'CategoriaInsumos.html'; // Redireccionar después del clic en OK
+                }
+            });
+        } else {
+            alert("Error al cambiar el estado de la categoría de insumos.");
+        }
+    } catch (error) {
+        console.error("Error de red:", error);
+    }
+}
+
+
 
 const registrarcategoriaInsumo = async () => {
     let idcategoria = document.getElementById('IdCategoria').value
@@ -107,6 +153,7 @@ const registrarcategoriaInsumo = async () => {
                     title: json.msg,
                     icon: 'success',
                     showCancelButton: false, // Evita que aparezca el botón "Cancelar"
+                    confirmButtonColor: '#722F37',
                     confirmButtonText: 'OK',
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -118,35 +165,81 @@ const registrarcategoriaInsumo = async () => {
         })
 }
 
-function Agregar1(){
-    var nombre=document.getElementById("NombreCategoria").value
-    var id= document.getElementById("IdCategoria").value
-    if(id==0){
+function Agregar1() {
+    var nombre = document.getElementById("NombreCategoria").value
+    var id = document.getElementById("IdCategoria").value
+    if (id == 0) {
         Swal.fire({
-            title:'Error',
-            text:'Aun no se agregado una identificación',
+            title: 'Error',
+            text: 'Aun no se agregado una identificación',
             confirmButtonColor: '#722F37',
             icon: 'error'
         })
-    }else if(nombre==""){
+    } else if (nombre == "") {
         Swal.fire({
-            title:'Error',
-            text:'Aun no se agregado una categoría',
+            title: 'Error',
+            text: 'Aun no se agregado una categoría',
             confirmButtonColor: '#722F37',
             icon: 'error'
         })
-    }else {
+    } else {
         // Todos los campos son válidos, llama a la función agregarCliente
         registrarcategoriaInsumo();
     }
 }
- function consultarCategoría(busqueda){
-    let urlAPI =url;
-    if(busqueda){
-        urlAPI+=`?_id=`
-    }
- }
 
-const actualizarCategoria=async()=>{
-    let id= document.getElementById()
+function consultarCategoria(busqueda) {
+    let urlAPI = url;
+    if (busqueda) {
+        urlAPI += `?id_categoriaInsumo=${encodeURIComponent(busqueda)}`;
+
+    }
+    fetch(urlAPI, {
+        method: 'GET',
+        mode: 'cors',
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+        .then((resp) => resp.json())
+        .then(function (data) {
+            let insumos = data.insumo[0];
+
+            document.getElementById('Idcategoria').value = insumos.id_categoriaInsumo;
+            document.getElementById('ActualizarCategoria').value = insumos.nombre_categoriaInsumo;
+        })
+        .catch(function (error) {
+            console.error('Error al obtener los detalle de la categoría', error)
+        })
+}
+
+
+const actualizarCategoria = async () => {
+    let id = document.getElementById('Idcategoria').value
+    let nombre = document.getElementById('ActualizarCategoria').value
+
+    let insumos = {
+        id_categoriaInsumo: id,
+        nombre_categoriaInsumo: nombre
+    }
+
+    fetch(url, {
+        method: 'PUT',
+        mode: 'cors',
+        body: JSON.stringify(insumos),//Convertir el objeto _usuario  a un JSON
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+        .then((resp) => resp.json()) //Obtener la respuesta y convertirla a json
+        .then(json => {
+            Swal.fire({
+                title: json.msg,
+                icon: 'success',
+                showCancelButton: false, // Evita que aparezca el botón "Cancelar"
+                confirmButtonColor: '#722F37',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // El usuario hizo clic en "OK"
+                    window.location.href = 'CategoriaInsumos.html'; // Redireccionar después del clic en OK
+                }
+            });
+        })
 }

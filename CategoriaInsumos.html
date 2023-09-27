@@ -20,7 +20,7 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--link de FONT AWESOME-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@5.15.4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -43,40 +43,59 @@
         <div class="barraLateral">
             <center>
                 <h3>Menú</h3>
-            </center>
-            <div class="sidebar">
+              </center>
+              <div class="sidebar">
                 <div class="module">
-                    <p class="module-heading">Compras <i class="bi bi-chevron-down arrow-icon"></i>
-                        <!-- Flecha hacia abajo -->
-                    </p>
-                    <ul class="options">
-                        <li onclick="window.location.href='CategoriaInsumos.html';">Categoria de insumos</li>
-                    </ul>
+                  <p class="module-heading">Configuración <i class="bi bi-chevron-down arrow-icon"></i>
+                    <!-- Flecha hacia abajo --></p>
+                  <ul class="options">
+                    <li onclick="window.location.href='gestionroles.html'">Roles</li>
+                    <li onclick="window.location.href='gestionPermisos.html'">Permisos</li>
+                  </ul>
                 </div>
                 <div class="module">
-                    <p class="module-heading">Producción <i class="bi bi-chevron-down arrow-icon"></i>
-                        <!-- Flecha hacia abajo -->
-                    </p>
-                    <ul class="options">
-                        <li onclick="window.location.href='OrdenProduccion.html'">Orden de producción</li>
-                    </ul>
+                  <p class="module-heading">Usuarios <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
+                  </p>
+                  <ul class="options">
+                    <li onclick="window.location.href='gestionUsuario.html'">Usuarios</li>
+                  </ul>
                 </div>
                 <div class="module">
-                    <p class="module-heading">Ventas <i class="bi bi-chevron-down arrow-icon"></i>
-                        <!-- Flecha hacia abajo --></p>
-                    <ul class="options">
-                        <li onclick="window.location.href='Ventas.html'">Ventas</li>
-                    </ul>
+                  <p class="module-heading">Compras <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
+                  </p>
+                  <ul class="options">
+                    <li onclick="window.location.href='CategoriaInsumos.html';">Categoria de insumos</li>
+                    <li onclick="window.location.href='Insumos.html';">Insumos</li>
+                    <li onclick="window.location.href='gestionProveedores.html'">Proveedores</li>
+                    <li onclick="window.location.href='gestionCompras.html'">Compras</li>
+                  </ul>
+                </div>
+                <div class="module">
+                  <p class="module-heading">Producción <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo -->
+                  </p>
+                  <ul class="options">
+                    <li onclick="window.location.href='OrdenProduccion.html'">Orden de producción</li>
+                  </ul>
+                </div>
+                <div class="module">
+                  <p class="module-heading">Ventas <i class="bi bi-chevron-down arrow-icon"></i> <!-- Flecha hacia abajo --></p>
+                  <ul class="options">
+                    <li onclick="window.location.href='categoriaProductos.html'">Categoria de productos</li>
+                    <li onclick="window.location.href='gestionProductos.html'">Productos</li>
+                    <li onclick="window.location.href='Clientes.html';">Clientes</li>
+                    <li onclick="window.location.href='pedidos.html'">Pedidos</li>
+                    <li onclick="window.location.href='Ventas.html'">Ventas</li>
+                  </ul>
                 </div>
                 <div class="usuario" onclick="window.location.href='Inicio.html'">
-                    <a class="usuario-link">
-                        <img src="archivos/imagenes/Profile.png" alt="">
-                        <span id="spanIcono">Nombre de Usuario</span>
-                    </a>
+                  <a class="usuario-link">
+                    <img src="archivos/imagenes/Profile.png" alt="">
+                    <span id="spanIcono">Nombre de Usuario</span>
+                  </a>
                 </div>
-
-
-            </div>
+        
+        
+              </div>
         </div>
         <div class="contenido">
             <center>
@@ -128,7 +147,7 @@
             $('table.display').DataTable();
         });
         </script>-->
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="js/ValidacionCatInsumos.js"></script>
         <script src="js/Menu.js"></script>
         <script type="text/javascript" src="js/dataTable.js"></script>
